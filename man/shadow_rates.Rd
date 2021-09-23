@@ -4,19 +4,19 @@
 \alias{shadow_rates}
 \title{Inverse Call Transformation}
 \usage{
-shadow_rates(.data, .group_col, .dbl_col, eta = 0.015, k = 0)
+shadow_rates(.data, .group_col, .dbl_col, .eta = 0.015, .strike = 0)
 }
 \arguments{
 \item{.data}{A tidy \code{tibble}.}
 
 \item{.group_col}{The maturities column.}
 
-\item{.dbl_col}{The numeric column with interest rates.}
+\item{.dbl_col}{A column with interest rates.}
 
-\item{eta}{A \code{double} with the threshold between high and low interest
+\item{.eta}{A \code{double} with the threshold between high and low interest
 rates environments.}
 
-\item{k}{A \code{double} with the call strike rate. Default's to zero.}
+\item{.strike}{A \code{double} with the call strike rate. Default's to zero.}
 }
 \value{
 A tidy \code{tibble}.
@@ -29,8 +29,8 @@ library(ggplot2)
 
 data("us_yield_curve")
 
-sr <- shadow_rates(us_yield_curve, maturity, rates)
+shadow <- shadow_rates(us_yield_curve, maturity, rates)
 
-ggplot(sr, aes(x = index, y = rates, color = maturity)) +
+ggplot(shadow, aes(x = index, y = rates, color = maturity)) +
   geom_line()
 }

@@ -15,9 +15,12 @@ knitr::opts_chunk$set(
 
 # ShadowRates
 
-> Removes the zero lower bound from interest-rates
+> Model near zero interest-rates 
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/Reckziegel/ShadowRates/branch/main/graph/badge.svg)](https://codecov.io/gh/Reckziegel/ShadowRates?branch=main)
+[![R-CMD-check](https://github.com/Reckziegel/ShadowRates/workflows/R-CMD-check/badge.svg)](https://github.com/Reckziegel/ShadowRates/actions)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 
@@ -34,13 +37,14 @@ devtools::install_github("Reckziegel/shadow")
 
 ```{r}
 library(ShadowRates)
+library(dplyr, warn.conflicts = FALSE)
 library(ggplot2)
 
 data("us_yield_curve")
 
-us_yield_curve |> 
+us_yield_curve %>%
   # shadow
-  shadow_rates(.group_col = maturity, .dbl_col = rates, eta = 0.015) |> 
+  shadow_rates(.group_col = maturity, .dbl_col = rates, .eta = 0.015) %>% 
   # plotting
   ggplot(aes(x = index, y = rates, color = maturity)) + 
   geom_line() + 
