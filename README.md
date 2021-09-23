@@ -20,7 +20,7 @@ You can install the development version from github:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Reckziegel/shadow")
+devtools::install_github("Reckziegel/ShadowRates")
 ```
 
 ## Toy Example
